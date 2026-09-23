@@ -3,1093 +3,1013 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PAIR TEMPLATE</title>
+<title>페어틀 제작기</title>
 
 <style>
-
-/* =================================================
-   기본 설정
-================================================= */
-
 * {
     box-sizing: border-box;
 }
 
-html,
 body {
     margin: 0;
-    padding: 0;
-    min-height: 100%;
+    font-family: Arial, "Noto Sans KR", sans-serif;
+    background: #eeeeee;
+    color: #111;
 }
 
-body {
-    font-family:
-        Arial,
-        "Noto Sans KR",
-        "Noto Sans JP",
-        sans-serif;
+/* =========================
+   전체 레이아웃
+========================= */
 
-    background: #eeeeee;
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
+.toolbar {
+    width: 100%;
+    background: #222;
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.toolbar h1 {
+    margin: 0;
+    font-size: 20px;
+    margin-right: auto;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.toolbar label {
+    font-size: 13px;
+}
+
+.toolbar input[type="color"] {
+    width: 38px;
+    height: 32px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.toolbar select,
+.toolbar button {
+    height: 34px;
+    border: none;
+    border-radius: 7px;
+    padding: 0 12px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.toolbar button {
+    background: #7d1bd1;
+    color: white;
+    font-weight: bold;
+}
+
+.toolbar button:hover {
+    background: #972ce8;
+}
+
+/* =========================
+   페어틀 영역
+========================= */
+
+.workspace {
+    flex: 1;
+    padding: 35px;
     display: flex;
     justify-content: center;
+    overflow: auto;
 }
 
-
-/* =================================================
-   전체 편집 영역
-================================================= */
-
-.editor {
-    width: 100%;
-    max-width: 620px;
-
-    padding: 25px 18px 50px;
-}
-
-
-/* =================================================
-   실제 페어틀
-================================================= */
-
-.canvas {
+.pair-template {
     position: relative;
 
+    width: 1500px;
+    min-width: 1100px;
+
+    min-height: 900px;
+
+    padding: 40px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    display: grid;
+
+    grid-template-columns: 920px 1fr;
+
+    column-gap: 70px;
+
+    overflow: hidden;
+}
+
+/* =========================
+   왼쪽 영역
+========================= */
+
+.left-area {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 5px;
+}
+
+/* 사람 / 캐릭터 이미지 */
+
+.person-block {
+    position: relative;
     width: 100%;
-
-    /* 세로로 긴 비율 */
-    aspect-ratio: 2 / 3.5;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #bdbdbd 55%,
-            #000000 100%
-        );
 }
 
-
-/* =================================================
-   페어명
-================================================= */
-
-.pair-title {
+.person-image {
     position: absolute;
 
-    top: 3%;
-    left: 10%;
-    width: 80%;
-    height: 8%;
+    width: 210px;
+    height: 210px;
 
-    border: none;
-    outline: none;
+    object-fit: cover;
 
-    background: transparent;
-
-    color: #000000;
-
-    font-size: clamp(30px, 7vw, 58px);
-    font-weight: 800;
-
-    text-align: center;
-
-    resize: none;
-
-    overflow: hidden;
-
-    padding: 0;
-}
-
-
-/* =================================================
-   사진 원
-================================================= */
-
-.photo-circle {
-    position: absolute;
-
-    width: 23%;
-    aspect-ratio: 1 / 1;
+    background: #a663df;
 
     border-radius: 50%;
 
-    overflow: hidden;
-
-    background: #a66be0;
-
-    /* 사진 원 테두리 */
-    border: 3px solid #ffffff;
+    top: -10px;
+    left: 0;
 
     cursor: pointer;
+}
+
+.person-label {
+    position: absolute;
+
+    top: 78px;
+    left: 0;
+
+    width: 210px;
+
+    text-align: center;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    pointer-events: none;
+
+    color: #111;
+}
+
+/* A 텍스트 */
+
+.name1-box {
+    position: absolute;
+
+    top: 215px;
+    left: 18px;
+
+    width: 250px;
+}
+
+.name2-box {
+    position: absolute;
+
+    top: 510px;
+    left: 680px;
+
+    width: 250px;
+}
+
+/* 이미지 영역 */
+
+.main-image {
+    position: absolute;
+
+    width: 600px;
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 35px;
+
+    background: #81b9f0;
+
+    cursor: pointer;
+}
+
+.main-image.a {
+    left: 220px;
+    top: 15px;
+}
+
+.main-image.b {
+    left: 0;
+    top: 330px;
+}
+
+/* B 캐릭터 */
+
+.person-image.b-person {
+    top: 235px;
+    left: 680px;
+}
+
+.person-label.b-label {
+    top: 313px;
+    left: 680px;
+}
+
+/* =========================
+   편집 가능한 텍스트
+========================= */
+
+.edit-text {
+    min-height: 60px;
+
+    border-radius: 25px;
+
+    background: #81b9f0;
+
+    padding: 22px 30px;
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    outline: none;
+
+    cursor: text;
+
+    overflow-wrap: anywhere;
+}
+
+.edit-text:focus {
+    box-shadow: 0 0 0 3px rgba(125, 27, 209, .35);
+}
+
+/* 이름 */
+
+.name-text {
+    background: transparent;
+    padding: 0;
+
+    min-height: auto;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    border-radius: 0;
+}
+
+/* =========================
+   A2 / B2
+========================= */
+
+.exchange-area {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 610px;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
 }
 
+.square-box {
+    position: relative;
 
-/* 첫 번째 사진 */
+    width: 180px;
+    height: 180px;
 
-.photo-one {
-    left: 10%;
-    top: 17%;
+    border-radius: 28px;
+
+    background: #8b16d4;
+
+    overflow: hidden;
 }
 
-
-/* 두 번째 사진 */
-
-.photo-two {
-    right: 10%;
-    top: 49%;
-}
-
-
-/* =================================================
-   사진
-================================================= */
-
-.photo-circle img {
+.square-box img {
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
-    display: none;
+    cursor: pointer;
 }
 
-
-/* 사진 넣기 전 문구 */
-
-.photo-placeholder {
+.square-letter {
     position: absolute;
 
     inset: 0;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
 
-    color: white;
-
-    font-size: 13px;
+    font-size: 34px;
+    font-weight: bold;
 
     pointer-events: none;
+
+    color: #111;
 }
 
+.exchange-center {
+    flex: 1;
 
-/* =================================================
-   텍스트 박스
-   ※ 테두리 없음
-================================================= */
+    margin: 0 25px;
 
-.text-box {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
 
-    border: none;
-    outline: none;
+    align-items: center;
 
-    resize: none;
-
-    overflow: hidden;
-
-    background: transparent;
-
-    color: #cfe4ff;
-
-    font-size: clamp(16px, 3.2vw, 25px);
-
-    font-weight: 600;
-
-    text-align: center;
-
-    padding: 10px;
-
-    line-height: 1.4;
+    gap: 14px;
 }
 
+.exchange-row {
+    width: 100%;
 
-/* 위쪽 작은 텍스트 */
-
-.text-one {
-    left: 36%;
-    top: 17%;
-
-    width: 52%;
-    height: 7%;
-}
-
-
-/* 위쪽 큰 텍스트 */
-
-.text-two {
-    left: 36%;
-    top: 25%;
-
-    width: 52%;
-    height: 14%;
-}
-
-
-/* 아래쪽 작은 텍스트 */
-
-.text-three {
-    left: 7%;
-    top: 49%;
-
-    width: 52%;
-    height: 7%;
-}
-
-
-/* 아래쪽 큰 텍스트 */
-
-.text-four {
-    left: 7%;
-    top: 57%;
-
-    width: 52%;
-    height: 14%;
-}
-
-
-/* =================================================
-   맨 아래 큰 텍스트
-================================================= */
-
-.text-bottom {
-    position: absolute;
-
-    left: 7%;
-    bottom: 5%;
-
-    width: 86%;
-    height: 16%;
-
-    border: none;
-    outline: none;
-
-    resize: none;
-
-    overflow: hidden;
-
-    background: transparent;
-
-    color: #cfe4ff;
-
-    font-size: clamp(17px, 3.5vw, 27px);
-
-    font-weight: 600;
-
-    text-align: center;
-
-    padding: 15px;
-
-    line-height: 1.5;
-}
-
-
-/* =================================================
-   편집 패널
-================================================= */
-
-.controls {
-    margin-top: 20px;
-
-    padding: 22px;
-
-    background: white;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 5px 25px rgba(0,0,0,0.08);
-}
-
-
-.controls h2 {
-    margin: 0 0 20px;
-
-    font-size: 21px;
-}
-
-
-/* =================================================
-   각각의 설정
-================================================= */
-
-.control-group {
-    margin-bottom: 25px;
-}
-
-.control-group:last-child {
-    margin-bottom: 0;
-}
-
-
-.control-group label {
-    display: block;
-
-    margin-bottom: 9px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-}
-
-
-/* =================================================
-   색상 선택
-================================================= */
-
-.color-row {
     display: flex;
 
     align-items: center;
 
     gap: 10px;
-
-    margin-bottom: 10px;
 }
 
+.arrow {
+    flex: 1;
 
-.color-row span {
-    min-width: 55px;
+    height: 3px;
 
-    font-size: 13px;
+    background: #111;
+
+    position: relative;
 }
 
+.arrow.right::after {
+    content: "";
 
-input[type="color"] {
-    width: 48px;
-    height: 35px;
+    position: absolute;
 
-    border: none;
+    right: -2px;
+    top: 50%;
 
-    padding: 0;
+    transform: translateY(-50%);
+
+    border-left: 18px solid #111;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.arrow.left::after {
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border-right: 18px solid #111;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.exchange-text {
+    flex: 1;
+
+    min-height: 42px;
 
     background: transparent;
 
-    cursor: pointer;
+    border-radius: 8px;
+
+    padding: 8px 12px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    outline: none;
+
+    text-align: center;
 }
 
-
-/* =================================================
-   슬라이더
-================================================= */
-
-input[type="range"] {
-    width: 100%;
+.exchange-text:focus {
+    background: rgba(129, 185, 240, .25);
 }
 
+/* =========================
+   오른쪽 타임라인
+========================= */
 
-/* =================================================
-   사진 버튼
-================================================= */
+.timeline-area {
+    position: relative;
 
-.photo-button {
-    width: 100%;
+    padding-top: 20px;
 
-    padding: 11px 15px;
+    padding-left: 60px;
 
-    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+}
 
-    border: none;
+.timeline-title {
+    font-size: 56px;
+
+    font-weight: 800;
+
+    margin: 0 0 40px 0;
+}
+
+/* 타임라인 본체 */
+
+.timeline-list {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    padding: 0 0 0 70px;
+}
+
+/* 검은 선 */
+
+.timeline-line {
+    position: absolute;
+
+    left: 10px;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 6px;
+
+    background: #111;
 
     border-radius: 10px;
-
-    background: #eeeeee;
-
-    font-size: 14px;
-
-    cursor: pointer;
 }
 
+/* 타임라인 박스 */
 
-.photo-button:hover {
-    background: #dddddd;
+.timeline-item {
+    position: relative;
+
+    min-height: 125px;
+
+    display: flex;
+    align-items: center;
 }
 
+.timeline-dot {
+    position: absolute;
 
-/* 파일 선택 input 숨기기 */
+    left: -65px;
+
+    width: 20px;
+    height: 20px;
+
+    background: #111;
+
+    border-radius: 50%;
+}
+
+.timeline-text {
+    width: 100%;
+
+    min-height: 125px;
+
+    border-radius: 32px;
+
+    background: #81b9f0;
+
+    padding: 28px 32px;
+
+    font-size: 28px;
+
+    line-height: 1.4;
+
+    outline: none;
+
+    resize: none;
+
+    font-family: inherit;
+
+    border: none;
+}
+
+.timeline-text:focus {
+    box-shadow: 0 0 0 3px rgba(125, 27, 209, .35);
+}
+
+/* =========================
+   선택된 요소 컨트롤
+========================= */
+
+.control-panel {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 280px;
+
+    background: rgba(25,25,25,.96);
+
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,.3);
+
+    z-index: 1000;
+}
+
+.control-panel h3 {
+    margin: 0 0 15px;
+
+    font-size: 16px;
+}
+
+.control-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+    gap: 10px;
+}
+
+.control-row label {
+    font-size: 13px;
+}
+
+.control-row input[type="range"] {
+    flex: 1;
+}
+
+.control-row input[type="color"] {
+    width: 50px;
+    height: 32px;
+    border: none;
+}
+
+/* 숨겨진 파일 입력 */
 
 .file-input {
     display: none;
 }
 
+/* 모바일 */
 
-/* =================================================
-   안내 문구
-================================================= */
-
-.help-text {
-    margin-top: 8px;
-
-    color: #777;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-
-/* =================================================
-   모바일
-================================================= */
-
-@media (max-width: 600px) {
-
-    .editor {
-        padding: 10px 10px 30px;
+@media (max-width: 1100px) {
+    .workspace {
+        justify-content: flex-start;
     }
 
-    .controls {
-        padding: 17px;
+    .pair-template {
+        transform-origin: top left;
     }
 
+    .control-panel {
+        width: 250px;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
 
+<div class="app">
 
-<div class="editor">
+    <!-- =========================
+         상단 편집 툴바
+    ========================== -->
 
+    <div class="toolbar">
 
-    <!-- =================================================
-         실제 페어틀
-    ================================================= -->
+        <h1>PAIR TEMPLATE EDITOR</h1>
 
-    <div class="canvas" id="canvas">
+        <div class="toolbar-group">
+            <label>배경</label>
 
+            <select id="bgType">
+                <option value="solid">단색</option>
+                <option value="linear">선형 그라데이션</option>
+                <option value="radial">원형 그라데이션</option>
+            </select>
 
-        <!-- =========================
-             페어명
-             영어 / 일본어 / 한자 가능
-        ========================== -->
-
-        <textarea
-            id="pairTitle"
-            class="pair-title"
-            placeholder="PAIR NAME"
-            maxlength="40"
-            spellcheck="false"
-        ></textarea>
-
-
-        <!-- =========================
-             첫 번째 사진
-        ========================== -->
-
-        <div
-            class="photo-circle photo-one"
-            onclick="openFile('fileOne')"
-        >
-
-            <span
-                class="photo-placeholder"
-                id="placeholderOne"
-            >
-                사진
-            </span>
-
-            <img
-                id="imageOne"
-                alt="첫 번째 사진"
-            >
-
+            <input type="color" id="bgColor1" value="#ffffff">
+            <input type="color" id="bgColor2" value="#d9e9ff">
         </div>
 
+        <button id="addTimeline">
+            + 타임라인 추가
+        </button>
 
-        <!-- =========================
-             두 번째 사진
-        ========================== -->
-
-        <div
-            class="photo-circle photo-two"
-            onclick="openFile('fileTwo')"
-        >
-
-            <span
-                class="photo-placeholder"
-                id="placeholderTwo"
-            >
-                사진
-            </span>
-
-            <img
-                id="imageTwo"
-                alt="두 번째 사진"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             위쪽 작은 텍스트
-        ========================== -->
-
-        <textarea
-            id="textOne"
-            class="text-box text-one"
-            placeholder="TEXT"
-            oninput="resizeText(this)"
-        ></textarea>
-
-
-        <!-- =========================
-             위쪽 큰 텍스트
-        ========================== -->
-
-        <textarea
-            id="textTwo"
-            class="text-box text-two"
-            placeholder="TEXT"
-            oninput="resizeText(this)"
-        ></textarea>
-
-
-        <!-- =========================
-             아래쪽 작은 텍스트
-        ========================== -->
-
-        <textarea
-            id="textThree"
-            class="text-box text-three"
-            placeholder="TEXT"
-            oninput="resizeText(this)"
-        ></textarea>
-
-
-        <!-- =========================
-             아래쪽 큰 텍스트
-        ========================== -->
-
-        <textarea
-            id="textFour"
-            class="text-box text-four"
-            placeholder="TEXT"
-            oninput="resizeText(this)"
-        ></textarea>
-
-
-        <!-- =========================
-             맨 아래 텍스트
-        ========================== -->
-
-        <textarea
-            id="textBottom"
-            class="text-bottom"
-            placeholder="TEXT"
-            oninput="resizeText(this)"
-        ></textarea>
-
+        <button id="removeTimeline">
+            - 타임라인 삭제
+        </button>
 
     </div>
 
 
+    <!-- =========================
+         작업 영역
+    ========================== -->
 
-    <!-- =================================================
-         편집 메뉴
-    ================================================= -->
+    <div class="workspace">
 
-    <div class="controls">
+        <div class="pair-template" id="template">
 
-        <h2>PAIR TEMPLATE 편집</h2>
+            <!-- =========================
+                 왼쪽
+            ========================== -->
+
+            <section class="left-area">
+
+                <!-- A 이미지 -->
+
+                <div class="person-block">
+
+                    <img
+                        id="imgA"
+                        class="person-image"
+                        src="https://via.placeholder.com/500x500/a663df/ffffff?text=A"
+                        alt="A"
+                    >
+
+                    <div class="person-label">A</div>
+
+                    <input
+                        type="file"
+                        class="file-input"
+                        id="fileA"
+                        accept="image/*"
+                    >
+
+                </div>
 
 
-        <!-- =========================
-             사진
-        ========================== -->
+                <!-- A 이름 -->
 
-        <div class="control-group">
-
-            <label>사진</label>
-
-            <button
-                class="photo-button"
-                onclick="openFile('fileOne')"
-            >
-                첫 번째 사진 선택
-            </button>
-
-            <button
-                class="photo-button"
-                onclick="openFile('fileTwo')"
-            >
-                두 번째 사진 선택
-            </button>
-
-        </div>
+                <div
+                    class="edit-text name-text name1-box"
+                    contenteditable="true"
+                >
+                    Name 1
+                </div>
 
 
-        <!-- =========================
-             배경 그라데이션
-        ========================== -->
+                <!-- A 설명 이미지/텍스트 -->
 
-        <div class="control-group">
-
-            <label>배경 그라데이션</label>
-
-            <div class="color-row">
-
-                <span>위쪽</span>
-
-                <input
-                    type="color"
-                    id="gradientTop"
-                    value="#ffffff"
-                    oninput="changeGradient()"
+                <img
+                    id="imgMainA"
+                    class="main-image a"
+                    src="https://via.placeholder.com/900x300/81b9f0/ffffff?text=IMAGE"
+                    alt="A Main"
                 >
 
-            </div>
-
-
-            <div class="color-row">
-
-                <span>아래쪽</span>
-
                 <input
-                    type="color"
-                    id="gradientBottom"
-                    value="#000000"
-                    oninput="changeGradient()"
+                    type="file"
+                    class="file-input"
+                    id="fileMainA"
+                    accept="image/*"
                 >
 
-            </div>
+
+                <!-- B 메인 이미지 -->
+
+                <img
+                    id="imgMainB"
+                    class="main-image b"
+                    src="https://via.placeholder.com/900x300/81b9f0/ffffff?text=IMAGE"
+                    alt="B Main"
+                >
+
+                <input
+                    type="file"
+                    class="file-input"
+                    id="fileMainB"
+                    accept="image/*"
+                >
 
 
-            <label>그라데이션 방향</label>
+                <!-- B 캐릭터 -->
 
-            <input
-                type="range"
-                id="gradientAngle"
-                min="0"
-                max="360"
-                value="180"
-                oninput="changeGradient()"
-            >
+                <img
+                    id="imgB"
+                    class="person-image b-person"
+                    src="https://via.placeholder.com/500x500/a663df/ffffff?text=B"
+                    alt="B"
+                >
+
+                <div class="person-label b-label">B</div>
+
+                <input
+                    type="file"
+                    class="file-input"
+                    id="fileB"
+                    accept="image/*"
+                >
+
+
+                <!-- B 이름 -->
+
+                <div
+                    class="edit-text name-text name2-box"
+                    contenteditable="true"
+                >
+                    Name 2
+                </div>
+
+
+                <!-- =========================
+                     A2 / B2
+                ========================== -->
+
+                <div class="exchange-area">
+
+                    <!-- A2 -->
+
+                    <div class="square-box">
+
+                        <img
+                            id="imgA2"
+                            src="https://via.placeholder.com/500x500/8b16d4/ffffff?text=A2"
+                            alt="A2"
+                        >
+
+                        <div class="square-letter">A2</div>
+
+                        <input
+                            type="file"
+                            class="file-input"
+                            id="fileA2"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+
+                    <!-- 교환 문구 -->
+
+                    <div class="exchange-center">
+
+                        <div class="exchange-row">
+
+                            <div class="arrow right"></div>
+
+                        </div>
+
+                        <div
+                            class="exchange-text"
+                            contenteditable="true"
+                        >
+                            A2에서 B2
+                        </div>
+
+
+                        <div class="exchange-row">
+
+                            <div class="arrow left"></div>
+
+                        </div>
+
+                        <div
+                            class="exchange-text"
+                            contenteditable="true"
+                        >
+                            B2에서 A2
+                        </div>
+
+                    </div>
+
+
+                    <!-- B2 -->
+
+                    <div class="square-box">
+
+                        <img
+                            id="imgB2"
+                            src="https://via.placeholder.com/500x500/8b16d4/ffffff?text=B2"
+                            alt="B2"
+                        >
+
+                        <div class="square-letter">B2</div>
+
+                        <input
+                            type="file"
+                            class="file-input"
+                            id="fileB2"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 오른쪽 타임라인
+            ========================== -->
+
+            <section class="timeline-area">
+
+                <h2 class="timeline-title">
+                    Time line
+                </h2>
+
+                <div
+                    class="timeline-list"
+                    id="timelineList"
+                >
+
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div
+                            class="timeline-text"
+                            contenteditable="true"
+                        >
+                            Timeline 1
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
         </div>
-
-
-        <!-- =========================
-             텍스트 박스 색상
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>하늘색 텍스트 색상</label>
-
-            <input
-                type="color"
-                id="textColor"
-                value="#cfe4ff"
-                oninput="changeTextColor()"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             페어명 색상
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>페어명 색상</label>
-
-            <input
-                type="color"
-                id="titleColor"
-                value="#000000"
-                oninput="changeTitleColor()"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             페어명 투명도
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>
-                페어명 투명도
-            </label>
-
-            <input
-                type="range"
-                id="titleOpacity"
-                min="0"
-                max="100"
-                value="100"
-                oninput="changeTitleOpacity()"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             사진 원 배경색
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>사진 원 배경색</label>
-
-            <input
-                type="color"
-                id="photoBackground"
-                value="#a66be0"
-                oninput="changePhotoBackground()"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             사진 원 테두리 색
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>사진 원 테두리 색</label>
-
-            <input
-                type="color"
-                id="photoBorder"
-                value="#ffffff"
-                oninput="changePhotoBorder()"
-            >
-
-        </div>
-
-
-        <!-- =========================
-             사진 원 테두리 두께
-        ========================== -->
-
-        <div class="control-group">
-
-            <label>
-                사진 원 테두리 두께
-            </label>
-
-            <input
-                type="range"
-                id="borderWidth"
-                min="0"
-                max="15"
-                value="3"
-                oninput="changePhotoBorderWidth()"
-            >
-
-        </div>
-
-
-        <div class="help-text">
-
-            ※ 페어명은 영어, 일본어, 한자 모두 입력할 수 있습니다.<br>
-            ※ 하늘색 텍스트 박스에는 테두리가 없습니다.<br>
-            ※ 사진 원의 테두리만 색상과 두께를 변경할 수 있습니다.
-
-        </div>
-
 
     </div>
-
 
 </div>
 
 
+<!-- =========================
+     선택된 텍스트 컨트롤
+========================= -->
 
-<!-- =================================================
-     사진 파일
-================================================= -->
+<div class="control-panel">
 
-<input
-    type="file"
-    id="fileOne"
-    class="file-input"
-    accept="image/*"
-    onchange="loadImage(
-        this,
-        'imageOne',
-        'placeholderOne'
-    )"
->
+    <h3>선택한 텍스트 설정</h3>
+
+    <div class="control-row">
+
+        <label>글자 크기</label>
+
+        <input
+            type="range"
+            id="fontSize"
+            min="10"
+            max="100"
+            value="28"
+        >
+
+        <span id="fontSizeValue">28</span>
+
+    </div>
 
 
-<input
-    type="file"
-    id="fileTwo"
-    class="file-input"
-    accept="image/*"
-    onchange="loadImage(
-        this,
-        'imageTwo',
-        'placeholderTwo'
-    )"
->
+    <div class="control-row">
 
+        <label>박스 색상</label>
+
+        <input
+            type="color"
+            id="boxColor"
+            value="#81b9f0"
+        >
+
+    </div>
+
+</div>
 
 
 <script>
 
-/* =================================================
-   파일 선택창
-================================================= */
+/* =====================================================
+   이미지 업로드
+===================================================== */
 
-function openFile(id) {
+function setupImageUpload(imageId, fileId) {
 
-    document
-        .getElementById(id)
-        .click();
+    const image = document.getElementById(imageId);
+    const file = document.getElementById(fileId);
 
+    image.addEventListener("click", () => {
+        file.click();
+    });
+
+    file.addEventListener("change", (event) => {
+
+        const selected = event.target.files[0];
+
+        if (!selected) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            image.src = e.target.result;
+        };
+
+        reader.readAsDataURL(selected);
+    });
 }
 
 
-/* =================================================
-   사진 넣기
-================================================= */
+setupImageUpload("imgA", "fileA");
+setupImageUpload("imgB", "fileB");
+setupImageUpload("imgA2", "fileA2");
+setupImageUpload("imgB2", "fileB2");
 
-function loadImage(input, imageId, placeholderId) {
-
-    const file = input.files[0];
-
-    if (!file) return;
+setupImageUpload("imgMainA", "fileMainA");
+setupImageUpload("imgMainB", "fileMainB");
 
 
-    const image =
-        document.getElementById(imageId);
-
-    const placeholder =
-        document.getElementById(placeholderId);
-
-
-    image.src =
-        URL.createObjectURL(file);
-
-
-    image.style.display =
-        "block";
-
-
-    placeholder.style.display =
-        "none";
-
-}
-
-
-/* =================================================
+/* =====================================================
    배경 그라데이션
-================================================= */
+===================================================== */
 
-function changeGradient() {
+const template = document.getElementById("template");
 
-    const top =
-        document.getElementById(
-            "gradientTop"
-        ).value;
-
-
-    const bottom =
-        document.getElementById(
-            "gradientBottom"
-        ).value;
+const bgType = document.getElementById("bgType");
+const bgColor1 = document.getElementById("bgColor1");
+const bgColor2 = document.getElementById("bgColor2");
 
 
-    const angle =
-        document.getElementById(
-            "gradientAngle"
-        ).value;
+function updateBackground() {
 
+    const type = bgType.value;
 
-    document.getElementById(
-        "canvas"
-    ).style.background =
-        `linear-gradient(
-            ${angle}deg,
-            ${top},
-            ${bottom}
-        )`;
+    const c1 = bgColor1.value;
+    const c2 = bgColor2.value;
 
+    if (type === "solid") {
+
+        template.style.background = c1;
+
+    } else if (type === "linear") {
+
+        template.style.background =
+            `linear-gradient(135deg, ${c1}, ${c2})`;
+
+    } else {
+
+        template.style.background =
+            `radial-gradient(circle, ${c1}, ${c2})`;
+
+    }
 }
 
 
-/* =================================================
-   텍스트 색상
-================================================= */
+bgType.addEventListener("change", updateBackground);
+bgColor1.addEventListener("input", updateBackground);
+bgColor2.addEventListener("input", updateBackground);
 
-function changeTextColor() {
 
-    const color =
-        document.getElementById(
-            "textColor"
-        ).value;
+/* =====================================================
+   텍스트 선택 시스템
+===================================================== */
 
+let selectedText = null;
 
-    const textBoxes =
-        document.querySelectorAll(
-            ".text-box, .text-bottom"
-        );
-
-
-    textBoxes.forEach(function(text) {
-
-        text.style.color = color;
-
-    });
-
-}
-
-
-/* =================================================
-   페어명 색상
-================================================= */
-
-function changeTitleColor() {
-
-    const color =
-        document.getElementById(
-            "titleColor"
-        ).value;
-
-
-    document.getElementById(
-        "pairTitle"
-    ).style.color = color;
-
-}
-
-
-/* =================================================
-   페어명 투명도
-================================================= */
-
-function changeTitleOpacity() {
-
-    const opacity =
-        document.getElementById(
-            "titleOpacity"
-        ).value;
-
-
-    document.getElementById(
-        "pairTitle"
-    ).style.opacity =
-        opacity / 100;
-
-}
-
-
-/* =================================================
-   사진 원 배경색
-================================================= */
-
-function changePhotoBackground() {
-
-    const color =
-        document.getElementById(
-            "photoBackground"
-        ).value;
-
-
-    const circles =
-        document.querySelectorAll(
-            ".photo-circle"
-        );
-
-
-    circles.forEach(function(circle) {
-
-        circle.style.background =
-            color;
-
-    });
-
-}
-
-
-/* =================================================
-   사진 원 테두리 색
-================================================= */
-
-function changePhotoBorder() {
-
-    const color =
-        document.getElementById(
-            "photoBorder"
-        ).value;
-
-
-    const circles =
-        document.querySelectorAll(
-            ".photo-circle"
-        );
-
-
-    circles.forEach(function(circle) {
-
-        circle.style.borderColor =
-            color;
-
-    });
-
-}
-
-
-/* =================================================
-   사진 원 테두리 두께
-================================================= */
-
-function changePhotoBorderWidth() {
-
-    const width =
-        document.getElementById(
-            "borderWidth"
-        ).value;
-
-
-    const circles =
-        document.querySelectorAll(
-            ".photo-circle"
-        );
-
-
-    circles.forEach(function(circle) {
-
-        circle.style.borderWidth =
-            width + "px";
-
-    });
-
-}
-
-
-/* =================================================
-   텍스트 자동 높이
-================================================= */
-
-function resizeText(element) {
-
-    element.style.height = "auto";
-
-    element.style.height =
-        element.scrollHeight + "px";
-
-}
-
-</script>
-
-
-</body>
-</html>
+const fontSize = document.getElementById("fontSize");
+const fontSizeValue = document
